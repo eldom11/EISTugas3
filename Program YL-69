@@ -1,0 +1,22 @@
+#include <Arduino.h>
+
+const int sensorPin = A1; 
+const int powerPin = 9;    
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(powerPin, OUTPUT);
+  digitalWrite(powerPin, LOW);
+} 
+
+void loop() {
+  digitalWrite(powerPin, HIGH);
+  delay(100);
+  int sensorValue = analogRead(sensorPin);
+  digitalWrite(powerPin, LOW);
+  float moisturePercentage = map(sensorValue, 0, 1023, 100, 0); 
+  Serial.print("Kelembaban: ");
+  Serial.print(moisturePercentage);
+  Serial.println(" %");
+  delay(1000);  
+}
